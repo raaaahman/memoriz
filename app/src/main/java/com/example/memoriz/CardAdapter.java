@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class CardAdapter extends ArrayAdapter<Integer> {
+public class CardAdapter extends ArrayAdapter<Card> {
     CardAdapter(Context context, int resources) {
         super(context, resources);
     }
@@ -19,9 +19,9 @@ public class CardAdapter extends ArrayAdapter<Integer> {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View card = inflater.inflate(R.layout.card_item, null);
         ImageView cardImg = card.findViewById(R.id.card_image);
-        Integer data = getItem(position);
+        Card item = getItem(position);
 
-        cardImg.setImageResource(data);
+        cardImg.setImageResource(item.getImage());
         return card;
     }
 }

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
@@ -17,12 +18,19 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.game_activity);
 
         CardAdapter cardAdapter = new CardAdapter(this, 0);
-        cardAdapter.add(R.drawable.ic_launcher_background);
-        cardAdapter.add(R.drawable.ic_launcher_background);
-        cardAdapter.add(R.drawable.ic_launcher_background);
-        cardAdapter.add(R.drawable.ic_launcher_background);
-        cardAdapter.add(R.drawable.ic_launcher_background);
-        cardAdapter.add(R.drawable.ic_launcher_background);
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
 
         gameBoard = findViewById(R.id.game_board);
         gameBoard.setNumColumns(GameBoard.calculateOptimalRowNb(cardAdapter.getCount()));
@@ -32,6 +40,11 @@ public class GameActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Clicked on : " + parent.getPositionForView(view), Toast.LENGTH_LONG).show();
+        Card itemClicked = (Card) parent.getItemAtPosition(position);
+        itemClicked.flip();
+        ImageView image = view.findViewById(R.id.card_image);
+        image.setImageResource(itemClicked.getImage());
     }
+
+
 }
