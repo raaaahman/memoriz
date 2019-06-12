@@ -2,12 +2,13 @@ package com.example.memoriz;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TableLayout;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private GridView gameBoard;
 
     @Override
@@ -26,5 +27,11 @@ public class GameActivity extends AppCompatActivity {
         gameBoard = findViewById(R.id.game_board);
         gameBoard.setNumColumns(GameBoard.calculateOptimalRowNb(cardAdapter.getCount()));
         gameBoard.setAdapter(cardAdapter);
+        gameBoard.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, "Clicked on : " + parent.getPositionForView(view), Toast.LENGTH_LONG).show();
     }
 }
