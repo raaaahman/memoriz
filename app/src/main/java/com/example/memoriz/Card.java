@@ -19,9 +19,12 @@ public class Card {
             case HIDDEN:
                 this.currentState = CardState.FLIPPED;
                 break;
-            case FLIPPED:
-                this.currentState = CardState.HIDDEN;
-                break;
+        }
+    }
+
+    public void reset() {
+        if (currentState == CardState.FLIPPED) {
+            this.currentState = CardState.HIDDEN;
         }
     }
 
