@@ -28,6 +28,10 @@ public class Card {
         }
     }
 
+    public boolean matches(Card card) {
+        return image == card.image;
+    }
+
     public CardState getState() {
         return currentState;
     }
