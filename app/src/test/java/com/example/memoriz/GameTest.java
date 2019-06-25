@@ -43,29 +43,25 @@ public class GameTest {
         verify(card).flip();
     }
 
-    @Test
-    public void resetCardsAfterTwoPicks() {
+    @ParameterizedTest
+    @CsvSource({
+            "0, 0, VALIDATED",
+            "0, 1, HIDDEN"
+    })
+    public void validatesOnlyPairsThatMatches(int card1Image, int card2Image, Card.CardState expectedState) {
         Game game = new Game();
-        Card card1 = Mockito.mock(Card.class);
-        Card card2 = Mockito.mock(Card.class);
+        Card card1 = new Card(card1Image);
+        Card card2 = new Card(card2Image);
 
         game.pickCard(card1);
         game.pickCard(card2);
 
-        verify(card1, times(1)).reset();
-        verify(card2, times(1)).reset();
+        Assertions.assertEquals(expectedState, card1.getState());
+        Assertions.assertEquals(expectedState, card1.getState());
     }
 
     @Test
-    public void whenPairMatchCardsAreValidated() {
+    public void endGameWhenAllCardsAreValidateds() {
         Game game = new Game();
-        Card card1 = new Card(0);
-        Card card2 = new Card( 0);
-
-        game.pickCard(card1);
-        game.pickCard(card2);
-
-        Assertions.assertEquals(Card.CardState.VALIDATED, card1.getState());
-        Assertions.assertEquals(Card.CardState.VALIDATED, card1.getState());
     }
 }

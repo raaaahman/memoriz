@@ -1,10 +1,7 @@
 package com.example.memoriz;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-
 public class Card {
-    private static final int CardBack = R.drawable.ic_launcher_background;
+    private static final int CardBack = R.drawable.card_back_green5;
 
     public enum CardState {
         HIDDEN, FLIPPED, VALIDATED

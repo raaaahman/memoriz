@@ -3,47 +3,44 @@ package com.example.memoriz;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class GameActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private GridView gameBoard;
+    private CardAdapter cardSet;
+    private Game game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_activity);
 
-        CardAdapter cardAdapter = new CardAdapter(this, 0);
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
-        cardAdapter.add(new Card(R.drawable.ic_launcher_foreground));
+        game = new Game();
 
-        gameBoard = findViewById(R.id.game_board);
-        gameBoard.setNumColumns(GameBoard.calculateOptimalRowNb(cardAdapter.getCount()));
-        gameBoard.setAdapter(cardAdapter);
+        cardSet = new CardAdapter(this, 0);
+        cardSet.add(new Card(R.drawable.cards_club_a));
+        cardSet.add(new Card(R.drawable.cards_club_j));
+        cardSet.add(new Card(R.drawable.cards_club_j));
+        cardSet.add(new Card(R.drawable.cards_club_k));
+        cardSet.add(new Card(R.drawable.cards_club_q));
+        cardSet.add(new Card(R.drawable.cards_club_a));
+        cardSet.add(new Card(R.drawable.cards_club_q));
+        cardSet.add(new Card(R.drawable.cards_club_k));
+
+        GridView gameBoard = findViewById(R.id.game_board);
+        gameBoard.setNumColumns(GameBoard.calculateOptimalRowNb(cardSet.getCount()));
+        gameBoard.setAdapter(cardSet);
         gameBoard.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Card itemClicked = (Card) parent.getItemAtPosition(position);
-        itemClicked.flip();
-        ImageView image = view.findViewById(R.id.card_image);
-        image.setImageResource(itemClicked.getImage());
+        game.pickCard(itemClicked);
+        cardSet.notifyDataSetChanged();
+
     }
 
 
