@@ -4,18 +4,24 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Game {
-    private ArrayList<Card> pickedCards;
+    private Card firstPickedCard;
     private int turnsPlayed;
 
     public void pickCard(Card card) {
         card.flip();
-        pickedCards.add(card);
 
-        if (pickedCards.size() % 2 == 0) {
+        if (firstPickedCard == null) {
+            firstPickedCard = card;
+        } else if (firstPickedCard.matches(card)) {
+            firstPickedCard.setState(Card.CardState.VALIDATED);
+            card.setState(Card.CardState.VALIDATED);
+            firstPickedCard = null;
             turnsPlayed++;
-            pickedCards.forEach(flippedCard -> {{
-                flippedCard.reset();
-            }});
+        } else {
+            firstPickedCard.reset();
+            firstPickedCard = null;
+            card.reset();
+            turnsPlayed++;
         }
     }
 
@@ -29,7 +35,6 @@ public class Game {
     }
 
     public Game() {
-        pickedCards = new ArrayList<>();
         turnsPlayed = 0;
     }
 }
