@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Memoriz</string>
+    <string name="win_text">You Won!</string>
+    <string name="win_replay_text">Play Again?</string>
 </resources>
