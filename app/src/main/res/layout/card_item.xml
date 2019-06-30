@@ -7,6 +7,13 @@
 
     <ImageView
         android:id="@+id/card_image"
+        android:alpha="0.0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="5dp" />
+    <ImageView
+        android:id="@+id/card_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

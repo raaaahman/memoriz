@@ -15,13 +15,20 @@ public class CardAdapter extends ArrayAdapter<Card> {
         super(context, resources);
     }
 
-    public View getView(int position, View convertView, ViewGroup viewParent) {
+    public View getView(int position, View cardView, ViewGroup viewParent) {
         LayoutInflater inflater = LayoutInflater.from(getContext());
-        View card = inflater.inflate(R.layout.card_item, null);
-        ImageView cardImg = card.findViewById(R.id.card_image);
-        Card item = getItem(position);
+        //Initialization of cards
+        if (cardView == null) {
+            cardView = inflater.inflate(R.layout.card_item, null);
+            Card item = getItem(position);
+            ImageView cardImg = cardView.findViewById(R.id.card_image);
+            cardImg.setTranslationZ(2f);
+            cardImg.setImageResource(item.getImage());
+            ImageView cardBack = cardView.findViewById(R.id.card_back);
+            cardBack.setTranslationZ(1f);
+            cardBack.setImageResource(Card.CardBack);
+        }
 
-        cardImg.setImageResource(item.getImage());
-        return card;
+        return cardView;
     }
 }

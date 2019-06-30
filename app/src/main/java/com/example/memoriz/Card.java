@@ -1,7 +1,7 @@
 package com.example.memoriz;
 
 public class Card {
-    private static final int CardBack = R.drawable.card_back_green5;
+    public static final int CardBack = R.drawable.card_back_green5;
 
     public enum CardState {
         HIDDEN, FLIPPED, VALIDATED
@@ -38,11 +38,7 @@ public class Card {
     }
 
     public int getImage() {
-        if (currentState == CardState.HIDDEN) {
-            return Card.CardBack;
-        } else {
-            return image;
-        }
+        return image;
     }
 
     Card(int image) {
